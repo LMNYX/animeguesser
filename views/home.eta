@@ -1,0 +1,54 @@
+<head>
+    <title>aniranked</title>
+    <meta charset="utf-8">
+    <meta name="description" content="aniranked is a game of Higher or Lower, but rather not typical one. You don't know the rank value of first one, you just have to guess what's more popular. Also it's anime.">
+    <link rel="icon" href="/public/images/favicon.svg" sizes="any" type="image/svg+xml">
+    <script src="https://kit.fontawesome.com/9dec104d7f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/public/serving/css/all.css">
+    <script src="/public/serving/js/all.js"></script>
+</head>
+<!-- aniranked.com -->
+<body>
+    <div class="main">
+        <div class="result-screen" id="result-screen" style="opacity: 0; pointer-events: none;">
+            <div class="inner-results">
+                <center>
+                    <img src="https://i.waifu.pics/W1vb9i~.gif" id="crying-anime-girl-sadge" class="block margined">
+                    <span class="block ebold big">You lost.</span>
+                    <span class="block ebold smallerthanbig">But you got <span class="highlighted" id="results-score">0</span> animes right!</span>
+                    <button class="button" id="try-again">Try again</button>
+                    <span class="block margined extrasmall">images of crying anime girls are got from <a href="https://waifu.pics">waifu.pics</a></span>
+                </center>
+            </div>
+        </div>
+        <center><img src="/public/images/logo.svg" class="logo"></center>
+        <div class="ebold big padded">
+            <p class="nopadding nomargin">A game of "What's more popular?"</p>
+            <p class="smallerthanbig nopadding nomargin">but with anime.</p>
+        </div>
+        <div class="ebold padded">
+            <div class="card" id="anime-card-1"
+            style="background: url(null) no-repeat; background-size: cover;">
+                <div class="more-info">
+                    <div class="centerize-inside"><span id="anime-name" class="anime-name">Loading...</span></div></div>
+                <div class="answer" style="opacity: 0;">
+                    <div class="centerize-inside"><center><span class="answer-icon"><i class="fa-solid fa-xmark"></i></span><span class="answer-rank">#123</span></center></div></div>
+            </div>
+            <div class="card" id="anime-card-2"
+                style="background: url(null) no-repeat; background-size: cover;">
+                <div class="more-info">
+                    <div class="centerize-inside"><span id="anime-name" class="anime-name">Loading...</span></div>
+                </div>
+                <div class="answer" style="opacity: 0;">
+                    <div class="centerize-inside">
+                        <center><span class="answer-icon"><i class="fa-solid fa-xmark"></i></span><span
+                                class="answer-rank">#123</span></center>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ebold padded"><span class="block big ebold">Score:</span><span class="block big ebold highlighted" id="score">0</span><span class="block ebold">High score: <span class="highlighted" id="highscore">...</span></div>
+        <div class="ebold padded">a game made by <a href="https://reze.moe">mishashto</a>, using <a href="https://github.com/Sheepposu">sheep's</a> idea and <a href="https://jikan.moe/">Jikan API</a>.</a></div>
+    </div>
+</body>
+<!-- aniranked.com -->

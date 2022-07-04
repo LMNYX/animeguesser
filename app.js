@@ -1,10 +1,46 @@
 require('dotenv').config();
 const { Jikan4 } = require("node-myanimelist");
-const fastify = require('fastify');
+const fastify = require('fastify')();
 const fs = require('fs');
+const path = require('path');
+
+var _anime;
+
+fastify.register(require('@fastify/static'), {
+    root: path.join(__dirname, 'public'),
+    prefix: '/public/',
+});
+
+fastify.register(require("@fastify/view"), {
+  engine: {
+    eta: require("eta"),
+  },
+});
+
+fastify.get('/', async (request, reply) => { 
+    reply.view("views/home.eta");
+});
+
+fastify.get('/api/get_versus', async (request, reply) =>
+{
+    var FirstAnime = GetRandomAnime();
+    var SecondAnime = GetRandomAnime(FirstAnime);
+    return [FirstAnime, SecondAnime];
+});
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function GetRandomAnime(exclude)
+{
+    _pick = _anime[Math.floor(Math.random() * _anime.length)];
+    if (exclude != undefined)
+    {
+        if (_pick == exclude)
+            return GetRandomAnime(exclude);
+    }
+    return _pick;
 }
 
 async function GetAnimeList(pages)
@@ -38,7 +74,24 @@ async function SyncDataToFile(data, file)
     fs.writeFileSync(file, JSON.stringify(data));
 }
 
+async function RunServer(port)
+{
+    if (port == undefined) port = 3000;
+    try
+    {
+        console.log("Server is running at port " + port);
+        await fastify.listen({ port: port });
+    } catch (err)
+    {
+        fastify.log.error(err);
+        console.warn("Restarting the server due to an unexpected error.");
+        RunServer(port);
+    }
+}
+
 (async () => {
-    _anime = await GetAnimeList(10);
-    await SyncDataToFile({"last_updated": Date.now(), "list": _anime}, 'anime.json');
+    _anime = await GetAnimeList(process.env.ANIME_PAGES);
+    await SyncDataToFile({ "last_updated": Date.now(), "list": _anime }, 'anime.json');
+    
+    await RunServer(process.env.HTTP_PORT);
 })().catch((e) => { console.log(e); });

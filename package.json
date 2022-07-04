@@ -9,7 +9,10 @@
   "author": "LMNYX",
   "license": "ISC",
   "dependencies": {
+    "@fastify/static": "^6.4.0",
+    "@fastify/view": "^7.0.0",
     "dotenv": "^16.0.1",
+    "eta": "^1.12.3",
     "fastify": "^4.2.0",
     "fastify-static": "^4.7.0",
     "node-myanimelist": "^4.0.0"
